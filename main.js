@@ -140,14 +140,11 @@ class Board {
     this.players[0].playerCards = d.cards.slice(0, 26);
     this.players[0].sortCardsByRank();
     this.players[0].sortCardsBySuit();
-    //console.log(this.players[0].playerCards.pop());
     this.players[1].playerCards = d.cards.slice(26, 52);
     this.players[1].sortCardsByRank();
     this.players[1].sortCardsBySuit();
-    //console.log(this.players[1].playerCards);
     this.play(this.players[0].playerCards, this.players[1].playerCards);
   }
 }
 let gameBoard = new Board();
 gameBoard.start("Mario", "Luigi");
-//console.log(gameBoard.playerCards);
