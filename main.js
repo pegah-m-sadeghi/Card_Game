@@ -117,8 +117,8 @@ class Board {
     let heartsCardsTwo = cardListTwo.filter((x) => x.suit === "hearts");
     let heartsCardsOne = cardListOne.filter((x) => x.suit === "hearts");
     getCards(heartsCardsTwo, heartsCardsOne);
-    let dimondsCardsTwo = cardListTwo.filter((x) => x.suit === "dimonds");
-    let dimondsCardsOne = cardListOne.filter((x) => x.suit === "dimonds");
+    let dimondsCardsTwo = cardListTwo.filter((x) => x.suit === "diamonds");
+    let dimondsCardsOne = cardListOne.filter((x) => x.suit === "diamonds");
     getCards(dimondsCardsTwo, dimondsCardsOne);
     let clubsCardsTwo = cardListTwo.filter((x) => x.suit === "clubs");
     let clubsCardsOne = cardListOne.filter((x) => x.suit === "clubs");
