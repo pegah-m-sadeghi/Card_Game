@@ -71,23 +71,21 @@ class Board {
     let playerOneScore = 0;
     let playerTwoScore = 0;
 
-    while (cardListOne.length > 0) {
-      let cardOne = cardListOne.pop();
-
-      if (cardOne.suit === "spades") {
-        let filtered = cardListTwo.filter((x) => x.suit === "spades");
-        const keys = Object.keys(filtered);
+    function getCards(arr, arr2) {
+      while (arr2.length > 0) {
+        let cardOne = arr2.pop();
+        const keys = Object.keys(arr);
         const values = keys.map((key) => {
-          return filtered[key].value;
+          return arr[key].value;
         });
         const max = Math.max.apply(null, values);
 
-        let cardTwo = filtered.filter((x) => x.value === max);
+        let cardTwo = arr.filter((x) => x.value === max);
 
-        filtered = filtered.filter((object) => {
+        arr = arr.filter((object) => {
           return object.value !== max;
         });
-        if (cardOne.value > cardTwo[0].value) {
+        if (arr.length > 0 && cardOne.value > cardTwo[0].value) {
           playerOneScore += 1;
           console.log(
             JSON.stringify(cardOne) +
@@ -106,77 +104,22 @@ class Board {
           );
           playerTwoScore += 1;
         }
-
-        //   if (cardOne.suit === "hearts") {
-        //     if (cardOne.value > cardTwo.value) {
-        //       console.log(
-        //         JSON.stringify(cardOne) +
-        //           " " +
-        //           JSON.stringify(cardTwo) +
-        //           " " +
-        //           "player 1 scored"
-        //       );
-        //       playerOneScore += 1;
-        //     } else {
-        //       console.log(
-        //         JSON.stringify(cardOne) +
-        //           " " +
-        //           JSON.stringify(cardTwo) +
-        //           " " +
-        //           "player 2 scored"
-        //       );
-        //       playerTwoScore += 1;
-        //     }
-        //   }
-        //   if (cardOne.suit === "diamonds") {
-        //     if (cardOne.value > cardTwo.value) {
-        //       console.log(
-        //         JSON.stringify(cardOne) +
-        //           " " +
-        //           JSON.stringify(cardTwo) +
-        //           " " +
-        //           "player 1 scored"
-        //       );
-        //       playerOneScore += 1;
-        //     } else {
-        //       console.log(
-        //         JSON.stringify(cardOne) +
-        //           " " +
-        //           JSON.stringify(cardTwo) +
-        //           " " +
-        //           "player 2 scored"
-        //       );
-        //       playerTwoScore += 1;
-        //     }
-        //   }
-        //   if (cardOne.suit === "clubs" && cardTwo.suit === "clubs") {
-        //     if (cardOne.value > cardTwo.value) {
-        //       console.log(
-        //         JSON.stringify(cardOne) +
-        //           " " +
-        //           JSON.stringify(cardTwo) +
-        //           " " +
-        //           "player 1 scored"
-        //       );
-        //       playerOneScore += 1;
-        //     } else {
-        //       console.log(
-        //         JSON.stringify(cardOne) +
-        //           " " +
-        //           JSON.stringify(cardTwo) +
-        //           " " +
-        //           "player 2 scored"
-        //       );
-        //       playerTwoScore += 1;
-        //     }
-        //   } else {
-        //     console.log(
-        //       JSON.stringify(cardOne) + " " + JSON.stringify(cardTwo) + " "
-        //     );
-        //   }
-        // }
       }
     }
+
+    let spadesCardsTwo = cardListTwo.filter((x) => x.suit === "spades");
+    let spadesCardsOne = cardListOne.filter((x) => x.suit === "spades");
+    getCards(spadesCardsTwo, spadesCardsOne);
+    let heartsCardsTwo = cardListTwo.filter((x) => x.suit === "hearts");
+    let heartsCardsOne = cardListOne.filter((x) => x.suit === "hearts");
+    getCards(heartsCardsTwo, heartsCardsOne);
+    let dimondsCardsTwo = cardListTwo.filter((x) => x.suit === "dimonds");
+    let dimondsCardsOne = cardListOne.filter((x) => x.suit === "dimonds");
+    getCards(dimondsCardsTwo, dimondsCardsOne);
+    let clubsCardsTwo = cardListTwo.filter((x) => x.suit === "clubs");
+    let clubsCardsOne = cardListOne.filter((x) => x.suit === "clubs");
+    getCards(clubsCardsTwo, clubsCardsOne);
+
     if (playerOneScore > playerTwoScore) {
       console.log("player 1 wins!");
     } else {
