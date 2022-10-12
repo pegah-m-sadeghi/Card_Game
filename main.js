@@ -95,7 +95,7 @@ class Board {
                 " " +
                 "player 1 scored"
             );
-          } else if (cardOne.value < cardTwo[0].value) {
+          } if (cardOne.value < cardTwo[0].value) {
             console.log(
               JSON.stringify(cardOne) +
                 " " +
