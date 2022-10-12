@@ -67,31 +67,115 @@ class Board {
     this.cardsInMiddle = [];
     this.players = [];
   }
-  play(cardOne, cardTwo) {
+  play(cardListOne, cardListTwo) {
     let playerOneScore = 0;
     let playerTwoScore = 0;
-    if (cardOne.suit === cardTwo.suit) {
-      if (cardOne.rank > cardTwo.value) {
-        playerOneScore += 1;
-        console.log(
-          JSON.stringify(cardOne) +
-            " " +
-            JSON.stringify(cardTwo) +
-            " " +
-            "player 1 scored!"
-        );
-      } else {
-        console.log(
-          JSON.stringify(cardOne) +
-            " " +
-            JSON.stringify(cardTwo) +
-            " " +
-            "player 2 scored"
-        );
-        playerTwoScore += 1;
+
+    while (cardListOne.length > 0) {
+      let cardOne = cardListOne.pop();
+
+      if (cardOne.suit === "spades") {
+        let filtered = cardListTwo.filter((x) => x.suit === "spades");
+        const keys = Object.keys(filtered);
+        const values = keys.map((key) => {
+          return filtered[key].value;
+        });
+        const max = Math.max.apply(null, values);
+
+        let cardTwo = filtered.filter((x) => x.value === max);
+
+        filtered = filtered.filter((object) => {
+          return object.value !== max;
+        });
+        if (cardOne.value > cardTwo[0].value) {
+          playerOneScore += 1;
+          console.log(
+            JSON.stringify(cardOne) +
+              " " +
+              JSON.stringify(cardTwo) +
+              " " +
+              "player 1 scored"
+          );
+        } else {
+          console.log(
+            JSON.stringify(cardOne) +
+              " " +
+              JSON.stringify(cardTwo) +
+              " " +
+              "player 2 scored"
+          );
+          playerTwoScore += 1;
+        }
+
+        //   if (cardOne.suit === "hearts") {
+        //     if (cardOne.value > cardTwo.value) {
+        //       console.log(
+        //         JSON.stringify(cardOne) +
+        //           " " +
+        //           JSON.stringify(cardTwo) +
+        //           " " +
+        //           "player 1 scored"
+        //       );
+        //       playerOneScore += 1;
+        //     } else {
+        //       console.log(
+        //         JSON.stringify(cardOne) +
+        //           " " +
+        //           JSON.stringify(cardTwo) +
+        //           " " +
+        //           "player 2 scored"
+        //       );
+        //       playerTwoScore += 1;
+        //     }
+        //   }
+        //   if (cardOne.suit === "diamonds") {
+        //     if (cardOne.value > cardTwo.value) {
+        //       console.log(
+        //         JSON.stringify(cardOne) +
+        //           " " +
+        //           JSON.stringify(cardTwo) +
+        //           " " +
+        //           "player 1 scored"
+        //       );
+        //       playerOneScore += 1;
+        //     } else {
+        //       console.log(
+        //         JSON.stringify(cardOne) +
+        //           " " +
+        //           JSON.stringify(cardTwo) +
+        //           " " +
+        //           "player 2 scored"
+        //       );
+        //       playerTwoScore += 1;
+        //     }
+        //   }
+        //   if (cardOne.suit === "clubs" && cardTwo.suit === "clubs") {
+        //     if (cardOne.value > cardTwo.value) {
+        //       console.log(
+        //         JSON.stringify(cardOne) +
+        //           " " +
+        //           JSON.stringify(cardTwo) +
+        //           " " +
+        //           "player 1 scored"
+        //       );
+        //       playerOneScore += 1;
+        //     } else {
+        //       console.log(
+        //         JSON.stringify(cardOne) +
+        //           " " +
+        //           JSON.stringify(cardTwo) +
+        //           " " +
+        //           "player 2 scored"
+        //       );
+        //       playerTwoScore += 1;
+        //     }
+        //   } else {
+        //     console.log(
+        //       JSON.stringify(cardOne) + " " + JSON.stringify(cardTwo) + " "
+        //     );
+        //   }
+        // }
       }
-    } else {
-      console.log("not equal");
     }
     if (playerOneScore > playerTwoScore) {
       console.log("player 1 wins!");
@@ -114,12 +198,7 @@ class Board {
     this.players[1].sortCardsByRank();
     this.players[1].sortCardsBySuit();
     //console.log(this.players[1].playerCards);
-    while (this.players[0].playerCards.length > 0) {
-      this.play(
-        this.players[0].playerCards.pop(),
-        this.players[1].playerCards.pop()
-      );
-    }
+    this.play(this.players[0].playerCards, this.players[1].playerCards);
   }
 }
 let gameBoard = new Board();
