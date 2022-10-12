@@ -85,24 +85,28 @@ class Board {
         arr = arr.filter((object) => {
           return object.value !== max;
         });
-        if (arr.length > 0 && cardOne.value > cardTwo[0].value) {
-          playerOneScore += 1;
-          console.log(
-            JSON.stringify(cardOne) +
-              " " +
-              JSON.stringify(cardTwo) +
-              " " +
-              "player 1 scored"
-          );
-        } else {
-          console.log(
-            JSON.stringify(cardOne) +
-              " " +
-              JSON.stringify(cardTwo) +
-              " " +
-              "player 2 scored"
-          );
-          playerTwoScore += 1;
+        if (arr.length > 0) {
+          if (cardOne.value > cardTwo[0].value) {
+            playerOneScore += 1;
+            console.log(
+              JSON.stringify(cardOne) +
+                " " +
+                JSON.stringify(cardTwo) +
+                " " +
+                "player 1 scored"
+            );
+          } else if (cardOne.value < cardTwo[0].value) {
+            console.log(
+              JSON.stringify(cardOne) +
+                " " +
+                JSON.stringify(cardTwo) +
+                " " +
+                "player 2 scored"
+            );
+            playerTwoScore += 1;
+          } else {
+            console.log("not matched");
+          }
         }
       }
     }
